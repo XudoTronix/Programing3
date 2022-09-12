@@ -1,0 +1,63 @@
+// Divide and Conquer PseudoCode example
+
+DyC (P) {
+  if ( SImple (P) ) // P pequeno -> su solucion directa
+    return solucion_directa (P);
+  else {
+    DIVIDE P en subproblemas P1, P2, ... Pk, k>1;
+    return ( COMBINA ( DyC(P1), DyC(P2), ... DyC(Pk) );
+    }
+}
+
+
+     [  g(n)                                  n pequeño
+T(n) [
+     [  T(n1) + T(n2) + ... + T(nk) + f(n)    n suficientemente grande 
+    
+    
+Nunca resuelve un problema a la vez
+Divide y conquista debe ser eficiente
+
+
+
+// Order Method MERGSORT
+
+Sea A = {5, 2, 4, 7, 1, 3, 2, 6} el arreglo a ordenar
+
+MERGE-SORT (A, i, d) { // i = inicion del arreglo, d = final del arreglo
+  if i < d {
+      m <- [(i + d)/2] // m = la mitad del arreglo
+      MERGe-SORT(A, i, m)
+      MERGE-SORT(A, m + 1, d)
+      MERGE(A, i, m, d)
+  }
+}
+
+    [ C0                     n pequeño
+T(n)[
+    [ 2 T(n/2) + Cn1 + C2    n suficientemente grande
+
+VENTAJA: El tiempo requerido por Merge-Sort es proporcional a N log N
+DESVENTAJA: Requiere de una estructura Auxiliar (ej: MERGE) (si hay poca memoria, no es el mejor algoritmo)
+
+
+// Order Method QUICKSORT
+
+Divide: Particiona un arrgle en dos subarreglos (posiblemente vacios)
+A[i...p-1] y A{p+1...d] tal que:
+  A[p] queda ordenado (en su posicion final)
+  Los elementos A[i..p-1] son menores o iguales qeu A[p] y
+  Los elementos en A[p+1...d] son mayores que A[p]
+  
+Conquista: Ordena los subarreglos A[i...p-1] y A[p+1...d] llamado reqursivamente al quicksort
+
+Combina: No hay necesidad de combinar las soluciones (por la forma que divide, ordena los subarreglos, luego todo el arrgelo queda ordenado)
+
+DESVENTAJA: Tiene riesgo de ser n^2 dependiendo como se divida.
+
+
+void QUICKSORT (int A[], int i, int j) {
+   if (i < j) {
+     int p = PARTICION (A, i, j);
+     QUICKSORT (A, p-1, i)
+     QUICKSORT (A, p+1, j)
